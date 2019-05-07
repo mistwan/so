@@ -1,0 +1,102 @@
+</head>
+<body>
+{include file="public/header,public/menu"/}
+<section>
+    <div class="init">
+        <a href="javascript:;" class="del-action">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span>批量删除</span>
+        </a>
+        <a href="javascript:;" class="add-action show-add-model">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>添加分类</span>
+        </a>
+        <span>共有数据：{:model("category")->where('status', '>', -1)->count()}条</span>
+    </div>
+    <div class="data">
+        <table style="min-width: 700px;">
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>ID</th>
+                <th>名称</th>
+                <th>状态</th>
+                <th>文章</th>
+                <th>发布时间</th>
+                <th>编辑</th>
+                <th>删除</th>
+                <th>查看</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="adminCat" id="vo"}
+            <tr class="admin">
+                <td><input type="checkbox" class="sel" sel_id="{$vo.cat_id}"></td>
+                <td>{$vo.cat_id}</td>
+                <td>{$vo.cat_name}</td>
+                <td><a href="{:url('category/status',['cat_id'=>$vo.cat_id,'status'=>$vo.status==1?0:1])}" class="status" title="点击修改状态">{$vo.status|status}</a>
+                </td>
+                <td>{$vo.article_count}</td>
+                <td>{$vo.update_time|date="Y-m-d"}</td>
+                <td><a href="{:url('category/edit',['id'=>$vo.cat_id])}" ><i class="fa fa-pencil-square-o fa-fw" aria-hidden="true" title="修改"></i></a>
+                </td>
+                <td> <a href="javascript:;" class="show-del-model"
+                        onClick="delAction('.confirm', '{:url('category/status',['cat_id'=>$vo.cat_id,'status'=>-1])}')"
+                        true_id="{$vo.cat_id}">
+                    <i class="fa fa-trash fa-fw" aria-hidden="true" title="删除"></i>
+                </a></td>
+                <td><a href="{:url('category/detail',['id'=>$vo.cat_id])}"><i class="fa fa-gg" aria-hidden="true" title="查看"></i></a></td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$adminCat|raw}
+    </div>
+
+</section>
+<form action="{:url('category/save')}" method="post">
+    <div class="add-model ">
+        <div class="model-shade cancel"></div>
+        <div class="model-box">
+            <h4>
+                <span>添加</span>
+                <i class="fa fa-times fa-lg cancel" aria-hidden="true"></i>
+            </h4>
+            <div class="input-group">
+                <p><input type="text" name="cat_name" placeholder="请添加分类名称" class="pane"></p>
+                <p><input type="text" name="cat_desc" placeholder="请添加分类描述" class="pane"></p>
+
+                <p>
+                    <select name="parent_id">
+                        <option value="0">一级分类</option>
+                        {volist name="indentCat" id="vo"}
+                        <option value="{$vo.cat_id}">
+                            {$vo.cat_name|raw}
+                        </option>
+                        {/volist}
+                    </select>
+                </p>
+                <input type="submit" class="button" value="提交审核">
+                <input type="button" class="button cancel" value="取消添加">
+            </div>
+        </div>
+    </div>
+</form>
+<div class="del-model">
+    <div class="model-shade cancel"></div>
+    <div class="model-box">
+        <h4>
+            <span>信息</span>
+            <i class="fa fa-times fa-lg cancel" aria-hidden="true"></i>
+        </h4>
+        <div class="input-group">
+            <p>确认删除这个分类吗？</p>
+            <input type="submit" class="button confirm" value="确&nbsp;定" onclick="">
+            <input type="button" class="button cancel" value="取&nbsp;消">
+        </div>
+    </div>
+</div>
+
+
+</div>
+{include file="public/footer" /}

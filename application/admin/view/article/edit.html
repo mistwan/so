@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/static/public/css/normalize.min.css">
+    <link rel="stylesheet" href="/static/public/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/wysiwyg/css/default.css">
+    <link rel="stylesheet" type="text/css" href="/static/wysiwyg/css/wysiwyg-editor.css"/>
+    <link href="/static/wysiwyg/css/demo.css" rel="stylesheet" type="text/css"/>
+    {load href="/static/admin/css/article.css" /}
+    <!--[if IE]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="art-add">
+    <h3>
+        <span>添加文章</span>
+        <a href="{:url('article/index')}" title="回到文章查看"><i class="fa fa-xing fa-lg" aria-hidden="true"></i></a>
+    </h3>
+    <form action="{:url('article/update')}" method="post" enctype="multipart/form-data">
+        <p><label>
+        <span>文章名称</span>
+        <input type="text" name="article_title" value="{$getArt.article_title}">
+    </label></p>
+        <p><label>
+            <span>文章描述</span>
+            <input type="text" name="article_desc" value="{$getArt.article_desc}">
+        </label></p>
+        <p><label class="upload">
+            <span>文章logo</span>
+            <div class="img-upload">
+                <input type="button" value="上传图片" id="button" class="button">
+                <input type="file" name="article_logo" value="{$getArt.article_logo}" onfocus="this.blur()"  id="upload" accept="image/*"/><br>
+                <img id="img" src="{$getArt.article_logo}" alt="logo">
+            </div>
+        </label></p>
+        <div id="cat">
+            <span>文章分类</span>
+            <select class="db" name="cat_id">
+                {volist name='getTree' id='vo'}
+                {if $vo.cat_id==$getArt.cat_id}
+                <option value="{$vo.cat_id}" selected>{$vo.cat_name|raw}</option>
+                {else /}
+                <option value="{$vo.cat_id}">{$vo.cat_name|raw}</option>
+                {/if}
+                {/volist}
+            </select>
+        </div>
+        <div class="quill">
+            <span>文章内容</span>
+            <textarea id="editor1" name="article_content" placeholder="Type your text here..." >{$getArt.article_content}
+            </textarea>
+        </div>
+        <p><label>
+            <div class="input-group" style="width: 99.9%;">
+                <input type="hidden" name="article_id" value="{$id}">
+                <input type="submit" value="确认更新" class="button">
+                <input type="button" value="取消更新" class="button" onclick="document.location.href='index'">
+            </div>
+        </label></p>
+    </form>
+</div>
+
+
+<script type="text/javascript" src="/static/wysiwyg/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/static/wysiwyg/js/wysiwyg.js"></script>
+<script type="text/javascript" src="/static/wysiwyg/js/wysiwyg-editor.js"></script>
+<script type="text/javascript" src="/static/wysiwyg/js/demo.js"></script>
+<script charset="utf-8" src="/static/public/js/component.js"></script>
+</body>
+</html>
+
+

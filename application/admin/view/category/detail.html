@@ -1,0 +1,54 @@
+{include file="public/header"}
+</head>
+<body>
+
+
+<div class="admin center detail">
+    <h4>
+        <span>查看分类</span>
+        <a href="{:url('category/index')}" title="回到分类"><i class="fa fa-xing" aria-hidden="true"></i></a>
+    </h4>
+    <table>
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>ID</td>
+            <td>{$getCat.cat_id}</td>
+        </tr>
+        <tr>
+            <td>分类名称</td>
+            <td>{$getCat.cat_name}</td>
+        </tr>
+        <tr>
+            <td>分类描述</td>
+            <td>{$getCat.cat_desc}</td>
+        </tr>
+        <tr>
+            <td>所属分类</td>
+            <td>{$getParentCat}</td>
+        </tr>
+        <tr>
+            <td>状态</td>
+            <td>{$getCat.status|status}</td>
+        </tr>
+        <tr>
+            <td>文章数量</td>
+            <td>{$getCat.article_count|default=20}</td>
+        </tr>
+        <tr>
+            <td>创建时间</td>
+            <td>{$getCat.create_time}</td>
+        </tr>
+        <tr>
+            <td>修改时间</td>
+            <td>{$getCat.update_time}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{include file="public/footer"}

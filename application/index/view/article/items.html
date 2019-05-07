@@ -1,0 +1,52 @@
+{include file="public/header"}
+{load href="/static/index/css/article.css"}
+</head>
+<body>
+
+<header style="height: 100px">
+    {include file="public/searcher"}
+</header>
+
+<div class="content">
+    {volist name="artList" id="vo"}
+    <section class="con">
+        <div class="img">
+            <img src="{$vo.article_logo}" alt="logo">
+        </div>
+        <div class="text">
+            <h2 class="title">{$vo.article_title}</h2>
+            <p class="meta">
+                <span>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
+                    {$vo.create_time|date="Y-m-d"}
+                </span>
+                <span>
+                    <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;
+                    {$vo.view_count|default=100}
+                </span>
+                <span class="up">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;
+                    {$vo.agree_count|default=50}
+                </span>
+            </p>
+            <p class="summary">{$vo.article_desc}</p>
+            <a href="{:url('article/index',['id'=>$vo.article_id])}" target="_blank">BROWSE IT&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+        </div>
+    </section>
+    {/volist}
+</div>
+
+
+<a href="javascript:;" class="top"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+
+
+{$artList|raw}
+
+{include file="public/footer"}
+<script src="/static/public/js/jquery-1.9.1.min.js"></script>
+<!--<script src="/static/index/js/index.js"></script>-->
+<script src="/static/public/js/component.js"></script>
+<script src="/static/public/js/respond.min.js"></script>
+<script src="/static/public/js/html5shiv.min.js"></script>
+</body>
+</html>

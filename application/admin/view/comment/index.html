@@ -1,0 +1,44 @@
+{include file="public/header" /}
+{css href="/static/admin/css/comment.css" /}
+</head>
+<body>
+{include file="public/menu"/}
+<div class="comment">
+    <h2>评论列表</h2>
+    <!--<section class="panel">
+        <p class="tag">
+            <span class="left">用户<b>wang</b>对文章<b>PHP</b>的评价</span>
+            <span class="right">2017-12-12 12:20:22</span>
+        </p>
+        <div>
+            嗯，这个文章真是厉害了，哈哈哈嗯，这个文章真是厉害了，哈哈哈嗯，这个文章真是厉害了，哈哈哈嗯，这个文章真是厉害了，哈哈哈嗯，这个文章真是厉害了，哈哈哈
+        </div>
+        <p class="handle">
+            <a href="javascript:;" class="status" title="点击修改状态">待审</a>
+            <a href="javascript:;" class="status" title="删除">删除</a>
+        </p>
+    </section>-->
+    {volist name="adminComment" id="vo"}
+    <section class="panel">
+        <p class="tag">
+            <span class="left">用户<b>{$vo.username}</b>对文章<b>
+                {:model("article")->where("article_id",$vo.article_id)->value("article_title")}
+                </b>说:</span>
+            <span class="right">{$vo.create_time}</span>
+        </p>
+        <div>
+           {$vo.comment}
+        </div>
+        <p class="handle">
+            <a href="{:url('comment/status',['id'=>$vo.id,'status'=>$vo.status==1?0:1])}
+" class="status" title="点击修改状态">{$vo.status|status}</a>
+            <a href="{:url('comment/status',['id'=>$vo.id,'status'=>-1])}" class="status" title="删除">删除</a>
+        </p>
+    </section>
+    {/volist}
+
+    {$adminComment|raw}
+</div>
+
+
+{include file="public/footer" /}

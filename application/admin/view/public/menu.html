@@ -1,0 +1,55 @@
+<header>
+    <a href="{:url('index/index')}" class="logo">
+        <img src="/static/public/img/logo.png" alt="logo">
+    </a>
+    <a href="javascript:;" class="nav" title="导航">
+        <i class="fa fa-list-ul fa-lg toggle-nav" aria-hidden="true"></i>
+    </a>
+    <a href="javascript:;" class="notice">
+        <i class="fa fa-bell-o fa-lg" aria-hidden="true"></i>
+        <span>&nbsp;提醒&nbsp;</span>
+        <small>12</small>
+    </a>
+    <a href="javascript:;" style="display: flex;align-items: center" class="admin-user">
+        <span>我是一只喵</span>
+        <img src="/static/admin/img/avatar.jpg" alt="avatar" height="30">
+    </a>
+    <a href="{:url('manager/logout')}" class="abort" title="退出">
+        <i class="fa fa-indent fa-lg" aria-hidden="true"></i>
+    </a>
+</header>
+<div class="main">
+<nav>
+    <ul class="nav-active">
+        <li>
+            <a href="{:url('index/index')}">
+                <i class="fa fa-home fa-lg" aria-hidden="true"></i>
+                <span>首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('category/index')}">
+                <i class="fa fa-sliders fa-lg" aria-hidden="true"></i>
+                <span>分类</span>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('article/index')}">
+                <i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i>
+                <span>文章</span>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('comment/index')}">
+                <i class="fa fa-commenting-o fa-lg" aria-hidden="true"></i>
+                <span>评论</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user-secret fa-lg" aria-hidden="true"></i>
+                <span>用户</span>
+            </a>
+        </li>
+    </ul>
+</nav>

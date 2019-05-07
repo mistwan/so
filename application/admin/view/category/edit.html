@@ -1,0 +1,48 @@
+</head>
+<body>
+{include file="public/header"}
+<form action="{:url('category/update')}" method="post">
+    <div class="admin center">
+        <h4>
+            <span>信息统计</span>
+            <a href="{:url('category/index')}" title="回到首页"><i class="fa fa-xing" aria-hidden="true"></i></a></h4>
+        <table>
+            <tr>
+                <td>分类名称</td>
+                <td>
+                    <input type="text" name="cat_name" placeholder="请添加分类名称" class="pane" value="{$getCat.cat_name}">
+                </td>
+            </tr>
+            <tr>
+                <td>分类描述</td>
+                <td>
+                    <input type="text" name="cat_desc" placeholder="请添加分类描述" class="pane" value="{$getCat.cat_desc}">
+                </td>
+            </tr>
+            <tr>
+                <td>所属分类</td>
+                <td>
+                    <select name="parent_id">
+                        <option value="0">一级分类</option>
+                        {volist name="getTree" id="vo"}
+                        {if $getCat.parent_id == $vo.cat_id}
+                        <option value="{$vo.cat_id}" selected>{$vo.cat_name|raw}</option>
+                        {else /}
+                        <option value="{$vo.cat_id}">{$vo.cat_name|raw}</option>
+                        {/if}
+                        {/volist}
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="input-group" style="margin: 20px 20px 0 0;">
+            <input type="hidden" name="cat_id" value="{$getCat.cat_id}">
+            <input type="submit" class="button" value="提交更新">
+            <a href="{:url('category/index')}">
+                <input type="button" class="button cancel" value="取消更新">
+            </a>
+        </div>
+    </div>
+</form>
+
+{include file="public/footer"}

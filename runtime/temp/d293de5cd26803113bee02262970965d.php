@@ -1,0 +1,161 @@
+<?php /*a:1:{s:58:"C:\xampp\htdocs\so\application\index\view\chart\index.html";i:1544521123;}*/ ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>手机游戏调查问卷</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        @media screen and (min-width: 500px) {
+            .survey {
+                width: 1000px;
+                margin: 20px auto;
+            }
+        }
+
+        .box-card {
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .item {
+            margin-bottom: 18px;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            display: table;
+            content: "";
+        }
+
+        .clearfix:after {
+            clear: both
+        }
+
+        .submit {
+            margin-top: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <div class="survey">
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>手机游戏调查问卷</span>
+                <el-button @click="onQuit" style="float: right; padding: 3px 0" type="text">退出问卷</el-button>
+            </div>
+            <div class="text item">
+                <el-form ref="form" :model="formLabelAlign" :label-position="labelPosition" label-width="80px">
+                    <el-form-item label="1.请选择性别">
+                        <el-radio-group v-model="formLabelAlign.sex">
+                            <el-radio label="0">男</el-radio>
+                            <el-radio label="1">女</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="2.您最近玩过手机游戏吗？">
+                        <el-radio-group v-model="formLabelAlign.rate">
+                            <el-radio label="0">每天都玩</el-radio>
+                            <el-radio label="1">每周都玩</el-radio>
+                            <el-radio label="2">偶尔会玩</el-radio>
+                            <el-radio label="3">没玩过但感兴趣</el-radio>
+                            <el-radio label="4">不感兴趣</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="3.你是可爱的？">
+                        <el-radio-group v-model="formLabelAlign.status">
+                            <el-radio label="0">无忧无虑的小学森</el-radio>
+                            <el-radio label="1">被作业压死的中学生</el-radio>
+                            <el-radio label="2">奋战高考的高中狗</el-radio>
+                            <el-radio label="3">生活在青春和梦想中的大学生</el-radio>
+                            <el-radio label="4">职场奋斗的上班族</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="4.下列哪种方式会让您对某一款游戏感兴趣？（最多选三项）">
+                        <el-checkbox-group v-model="formLabelAlign.mode" :min="1" :max="3">
+                            <el-checkbox label="0" name="type">海报等平面广告</el-checkbox>
+                            <el-checkbox label="1" name="type">视频广告</el-checkbox>
+                            <el-checkbox label="2" name="type">朋友推荐</el-checkbox>
+                            <el-checkbox label="3" name="type">图文信息推荐</el-checkbox>
+                            <el-checkbox label="4" name="type">其他</el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>
+                    <el-form-item label="5.您对哪种类型的手游视频感兴趣？">
+                        <el-checkbox-group v-model="formLabelAlign.type">
+                            <el-checkbox label="0" name="type">手游资讯</el-checkbox>
+                            <el-checkbox label="1" name="type">评测攻略</el-checkbox>
+                            <el-checkbox label="2" name="type">手游吐槽</el-checkbox>
+                            <el-checkbox label="3" name="type">美女主播解说</el-checkbox>
+                            <el-checkbox label="4" name="type">其他</el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>
+                    <el-form-item label="6.您觉得玩游戏给你带来了什么？">
+                        <el-input type="textarea" v-model="formLabelAlign.what"></el-input>
+                    </el-form-item>
+                    <el-form-item class="submit">
+                        <el-button type="primary" @click="onSubmit">提交答卷</el-button>
+                        <el-button @click="onQuit">取消答题</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-card>
+    </div>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                labelPosition: 'top',
+                formLabelAlign: {
+                    sex: '',
+                    rate: '',
+                    status: '',
+                    mode: [],
+                    type: [],
+                    what: ''
+                }
+            }
+        },
+        methods: {
+            onSubmit() {
+                let data = this.formLabelAlign
+                console.log(data)
+                axios.post('<?php echo url("chart/add"); ?>', {
+                    data: data
+                }).then(function (response) {
+                    // console.log(response.data)
+                    if (response.data == 1) {
+                        document.location.href = '<?php echo url("chart/chart"); ?>'
+                    } else {
+                        alert("前五个选项必须选择！")
+                        setTimeout(function () {
+                            document.location.href = '<?php echo url("chart/index"); ?>'
+                        }, 100)
+                        console.log(response.data)
+
+                    }
+                    // alert()
+
+                }).catch(function (error) {
+                    // alert(error.data)
+                    document.location.href = '<?php echo url("chart/index"); ?>'
+                })
+            },
+            onQuit() {
+                document.location.href = "<?php echo url('index/index'); ?>"
+            }
+        }
+    })
+</script>
+
+</html>

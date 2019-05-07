@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/public/css/normalize.min.css">
+    <link rel="stylesheet" href="/static/admin/css/login.css">
+</head>
+<body>
+<div class="login">
+    <img src="/static/index/img/logo.png" alt="logo">
+    <form action="" method="post">
+        <input type="text" name="user" class="user" placeholder="请输入用户名" autocomplete><br>
+        <input type="password" name="pass" class="pass" placeholder="请输入密码" autocomplete><br>
+        <div>
+            <input type="checkbox" name="check" id="check" checked/>
+            <label for="check">记住我</label>
+        </div>
+        <a href="{:url('register/index')}">注册</a>
+        <a href="{:url('register/index')}">忘记密码？</a>
+        <input type="submit" class="submit" value="登录">
+    </form>
+</div>
+</body>
+</html>

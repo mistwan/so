@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$detailArt.article_title}</title>
+    <link rel="stylesheet" href="/static/index/css/head&foot.css">
+    <link rel="stylesheet" href="/static/public/css/normalize.min.css">
+    <link rel="stylesheet" href="/static/public/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/public/css/component.css">
+    {load href="/static/index/css/article.css"}
+</head>
+<body>
+
+<header style="height: 100px">
+    {include file="public/searcher"}
+</header>
+
+<!--<div class="content">
+    <article>
+        <h1 class="title">作为程序员的你，工作台是怎样的？</h1>
+        <hr>
+        <div class="article">
+            <p>很好用的图床，上传一张图片，可以获得多个免费图床的地址，</p>
+            <p>比如：新浪图床、淘宝图床，如果图床失效了，会更新其他的上来。</p>
+            <p>同时也支持云存储，登录好账号后在后台设置一下接口代码。</p>
+            <p>你上传过的图片，可以在上传历史中找到，方便找回上传过的内容。</p>
+            <p>用着很方便，推荐给大家。</p>
+            <p>访问地址： 聚合图床</p>
+            <p>每次一分享加速器资源过不了几天就和谐失效了，为了小伙伴们的游戏体验，老夜也是乐此不疲的继续为大家分享着</p>
+            <img class="alignnone size-large" src="https://ww1.sinaimg.cn/large/005YhI8igy1fwsz9zg94dj31a50v3n5k"/>
+        </div>
+        <div class="attitude">
+            <a href="javascript:;">
+                <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+                <span>12</span>
+            </a>
+            <a href="javascript:;">
+                <i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
+                <span>12</span>
+            </a>
+            <a href="javascript:;">
+                <i class="fa fa-jpy fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="comment">
+            <span>评论</span>
+            <hr>
+            <div class="reply">
+                <form action="" method="get">
+                    <input type="text" placeholder="写下你的评论" class="text">
+                    <input type="submit" value="评论" class="submit">
+                </form>
+            </div>
+            <div class="replied">
+                <a href="javascript:;" class="avatar">
+                    <img src="/static/index/img/avatar.jpg" alt="avatar">
+                    <span>用户</span>
+                </a>
+                <a href="javascript:;" class="show-reply">回复&nbsp;<i class="fa fa-share" aria-hidden="true"></i></a>
+                <p class="reply-content">每次一分享加速器资源过不了几天就和谐失效了，为了小伙伴们的游戏体验，老夜也是乐此不疲的继续为大家分享着</p>
+                <form action="" method="get">
+                    <input type="text" placeholder="写下你的回复..." class="text reply-input">
+                    <input type="submit" value="回复" class="submit">
+                </form>
+            </div>
+        </div>
+    </article>
+    <section class="tags">
+        <h2>话题分类</h2>
+        <hr>
+        <a href="javascript:;"><span>Java</span>&nbsp;<span>11</span></a>
+        <a href="javascript:;"><span>PHP</span>&nbsp;<span>999</span></a>
+        <a href="javascript:;"><span>前端</span>&nbsp;<span>5</span></a>
+        <a href="javascript:;"><span>娱乐</span>&nbsp;<span>44</span></a>
+        <a href="javascript:;"><span>娱乐</span>&nbsp;<span>33</span></a>
+        <a href="javascript:;"><span>图片</span>&nbsp;<span>3</span></a>
+        <a href="javascript:;"><span>音乐</span>&nbsp;<span>3</span></a>
+    </section>
+</div>-->
+<div class="content">
+    <article>
+        <h1 class="title">{$detailArt.article_title}</h1>
+        <hr>
+        <div class="article">
+            {$detailArt.article_content|raw}
+        </div>
+        <div class="attitude">
+            <a href="javascript:;" id="agree" aid="{$detailArt.article_id}">
+                <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+                <span>{$detailArt.agree|default=101}</span>
+            </a>
+            <!--<a href="javascript:;" id="disagree" aid="{$detailArt.article_id}">
+                <i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
+                <span></span>
+            </a>-->
+            <a href="javascript:;">
+                <i class="fa fa-jpy fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="comment">
+            <span>评论</span>
+            <hr>
+            <div class="reply">
+                <form action="{:url('comment/add')}" method="post">
+                    <!--<div contenteditable="true">xxxxxx</div>-->
+                    <textarea name="comment"
+                              placeholder="写下你的评论"
+                              class="write"
+                              autoHeight="true"></textarea>
+                    <!--<input type="text" name="comment" >-->
+                    <div class="user-info">
+                        <p>
+                            <input type="text"
+                                   name="username"
+                                   class="username"
+                                   placeholder="请填写你的昵称...">
+                        </p>
+                        <p>
+                            <input type="text" name="email" class="email" placeholder="请填写你的邮箱...">
+                        </p>
+                    </div>
+                    <input type="hidden" name="article_id" value="{$detailArt.article_id}">
+                    <input type="submit" value="提交评论" class="submit-comment">
+                </form>
+            </div>
+
+            <!--<div class="replied">
+                <span>王</span>
+                <a href="javascript:;" class="show-discuss"><span>回复</span>&nbsp;<i class="fa fa-share" aria-hidden="true"></i></a>
+                <p class="reply-content">每次一分享加速器资源过不了几天就和谐失效了，为了小伙伴们的游戏体验，老夜也是乐此不疲的继续为大家分享着</p>
+                <form action="" method="post" class="discuss">
+                    <input type="text" placeholder="写下你的回复..." class="write" >
+                    <input type="submit" value="回复" class="submit" >
+                </form>
+            </div>-->
+            {volist name=":model('Comment')->getIndexComment($detailArt.article_id)" id="vo"}
+            <hr>
+            <div class="replied">
+                <b>{$vo.username}</b>
+                <!--<a href="javascript:;" class="show-discuss">
+                    <span>回复</span>&nbsp;<i class="fa fa-share" aria-hidden="true"></i>
+                </a>-->
+                <p class="reply-content">
+                   {$vo.comment}
+                </p>
+                <!--<form action="" method="post" class="discuss">
+                    <input type="text" placeholder="写下你的回复..." class="write" >
+                    <input type="submit" value="回复" class="submit" >
+                </form>-->
+            </div>
+            {/volist}
+        </div>
+    </article>
+
+    <section class="tags">
+        <h2>文章分类</h2>
+        <hr>
+        {volist name="cat" id="vo"}
+        <a href="{:url('article/items',['id'=>$vo.cat_id])}">
+            <span>{$vo.cat_name}</span><span>{$vo.cat_count}</span>
+        </a>
+        {/volist}
+    </section>
+</div>
+{include file="public/footer"}
+{include file="public/script"}
+<script>
+    let SCOPE = {
+        "agree_url": "{:url('api/article/attitude', ['code'=>1])}",
+        "disagree_url": "{:url('api/article/attitude', ['code => 0'])}",
+    }
+</script>
+</body>
+</html>
